@@ -9,29 +9,38 @@ function Header(props){
   </header>
 }
 
-function Nav(){
+function Nav(props){
+  const lis = []
+  for(let i=0; i<props.topics.length; i++){
+    let t = props.topics[i];
+    lis.push(<li key={t.id}><a href={'/read/'+t.body}>{t.title}</a></li>)
+  }
   return <nav>
     <ol>
-      <li><a href='/read/1'>html</a></li>
-      <li><a href='/read/2'>css</a></li>
-      <li><a href='/read/3'>js</a></li>
+      {lis}  
     </ol>
   </nav>
 }
 
-function Article(){
+function Article(props){
   return <article>
-  <h2>Welcome</h2>
-  Hello, React
+  <h2>{props.title}</h2>
+  {props.body}
 </article>
 }
 
 function App() {
+  const topics = [
+    {id:1, title:'html',body:'html is ...'},
+    {id:2, title:'css',body:'css is ...'},
+    {id:3, title:'javascript',body:'javascript is ...'}
+  ]
   return (
     <div>
       <Header title="React"></Header>
-      <Nav></Nav>
-      <Article></Article>
+      <Nav topics={topics}></Nav> {/* 변수 전달 시 중괄호로 감싸줌 */}
+      <Article title="Welcom" body="Hello, React"></Article>
+      <Article title="Hi" body="Hello, WEB"></Article>
     </div>
   );
 }
