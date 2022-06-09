@@ -1,9 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 
-function Header(){
+function Header(props){
+  console.log('props : ',props)
+  console.log('props.title : ',props.title)
   return <header>
-    <h1><a href="/">Reat</a></h1>
+    <h1><a href="/">{props.title}</a></h1>
   </header>
 }
 
@@ -27,7 +29,7 @@ function Article(){
 function App() {
   return (
     <div>
-      <Header></Header>
+      <Header title="React"></Header>
       <Nav></Nav>
       <Article></Article>
     </div>
