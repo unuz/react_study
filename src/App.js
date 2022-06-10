@@ -5,7 +5,7 @@ function Header(props){
   console.log('props : ',props)
   console.log('props.title : ',props.title)
   return <header>
-    <h1><a href="/" onClick={function(event){
+    <h1><a href="/" onClick={(event)=>{
       event.preventDefault();
       props.onChangeMode();
     }}>{props.title}</a></h1>
@@ -16,7 +16,13 @@ function Nav(props){
   const lis = []
   for(let i=0; i<props.topics.length; i++){
     let t = props.topics[i];
-    lis.push(<li key={t.id}><a href={'/read/'+t.body}>{t.title}</a></li>)
+    lis.push(
+    <li key={t.id}>
+      <a id={t.id} href={'/read/'+t.body} onClick={(event)=>{
+        event.preventDefault();
+        props.onChangeMode(event.target.id);
+      }}>{t.title}</a>
+    </li>)
   }
   return <nav>
     <ol>
@@ -40,10 +46,12 @@ function App() {
   ]
   return (
     <div>
-      <Header title="React" onChangeMode={function(){
+      <Header title="React" onChangeMode={()=>{
         alert('Header Click');
       }}></Header>
-      <Nav topics={topics}></Nav> {/* 변수 전달 시 중괄호로 감싸줌 */}
+      <Nav topics={topics} onChangeMode={(id)=>{
+        alert(id);
+      }}></Nav> {/* 변수 전달 시 중괄호로 감싸줌 */}
       <Article title="Welcom" body="Hello, React"></Article>
       <Article title="Hi" body="Hello, WEB"></Article>
     </div>
