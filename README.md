@@ -1,7 +1,7 @@
 # React Study
 ## react 공부를 위한 프로젝트
 
-### 구성도
+# 구성도
 
 ``` bash
 ├── build           //build 폴더(배포시)
