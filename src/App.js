@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 
@@ -99,16 +98,16 @@ function App() {
   return (
     <div>
       <Header title="React" onChangeMode={()=>{
-        setMode('WELCOME'); {/* mode state 'WELCOME'으로 변경 */}
+        setMode('WELCOME'); //mode state 'WELCOME'으로 변경
       }}></Header>
-      <Nav topics={topics} onChangeMode={(id)=>{
-        setMode('READ'); {/* mode state 'READ'로 변경 */}
+      <Nav topics={topics} onChangeMode={(id)=>{ // 변수 전달 시 중괄호로 감싸줌
+        setMode('READ'); //mode state 'READ'로 변경
         setId(id);
-      }}></Nav> {/* 변수 전달 시 중괄호로 감싸줌 */}
+      }}></Nav>
       {content}
       <a href='/create' onClick={(event)=>{
-        event.preventDefault(); {/* a 태그 기본 이벤트 실행 X */}
-        setMode('CREATE'); {/* mode state 'CREATE'로 변경 */}
+        event.preventDefault(); // a 태그 기본 이벤트 실행 X
+        setMode('CREATE'); // mode state 'CREATE'로 변경
       }}>Create</a>
     </div>
   );
