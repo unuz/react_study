@@ -5,7 +5,10 @@ function Header(props){
   console.log('props : ',props)
   console.log('props.title : ',props.title)
   return <header>
-    <h1><a href="/">{props.title}</a></h1>
+    <h1><a href="/" onClick={function(event){
+      event.preventDefault();
+      props.onChangeMode();
+    }}>{props.title}</a></h1>
   </header>
 }
 
@@ -37,7 +40,9 @@ function App() {
   ]
   return (
     <div>
-      <Header title="React"></Header>
+      <Header title="React" onChangeMode={function(){
+        alert('Header Click');
+      }}></Header>
       <Nav topics={topics}></Nav> {/* 변수 전달 시 중괄호로 감싸줌 */}
       <Article title="Welcom" body="Hello, React"></Article>
       <Article title="Hi" body="Hello, WEB"></Article>
