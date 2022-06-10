@@ -2,17 +2,17 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 
+//Header Component
 function Header(props){
-  console.log('props : ',props)
-  console.log('props.title : ',props.title)
   return <header>
     <h1><a href="/" onClick={(event)=>{
-      event.preventDefault();
-      props.onChangeMode();
-    }}>{props.title}</a></h1>
+      event.preventDefault(); // a태그의 기본 이벤트 실행 X
+      props.onChangeMode(); // onChangeMode 함수 실행
+    }}>{props.title}</a></h1>  {/* props로 전달받은 title 출력 */}
   </header>
 }
 
+//Nav Component
 function Nav(props){
   const lis = []
   for(let i=0; i<props.topics.length; i++){
@@ -20,8 +20,8 @@ function Nav(props){
     lis.push(
     <li key={t.id}>
       <a id={t.id} href={'/read/'+t.body} onClick={(event)=>{
-        event.preventDefault();
-        props.onChangeMode(Number(event.target.id));
+        event.preventDefault(); // a태그의 기본 이벤트 실행 X
+        props.onChangeMode(Number(event.target.id)); // onChangeMode 함수 실행
       }}>{t.title}</a>
     </li>)
   }
@@ -32,6 +32,7 @@ function Nav(props){
   </nav>
 }
 
+//Article Component
 function Article(props){
   return <article>
   <h2>{props.title}</h2>
@@ -39,14 +40,15 @@ function Article(props){
 </article>
 }
 
+//Create Component
 function Create(props){
   return <article>
     <h2>Create</h2>
     <form onSubmit={(event)=>{
-      event.preventDefault();
+      event.preventDefault(); // submit 기본 이벤트 실행 X
       const title = event.target.title.value;
       const body = event.target.body.value;
-      props.onCreate(title, body);
+      props.onCreate(title, body); // onCreate 실행
     }}>
       <p>
         <input type="text" name="title" placeholder='title을 입력하세요'/>
@@ -97,16 +99,16 @@ function App() {
   return (
     <div>
       <Header title="React" onChangeMode={()=>{
-        setMode('WELCOME');
+        setMode('WELCOME'); {/* mode state 'WELCOME'으로 변경 */}
       }}></Header>
       <Nav topics={topics} onChangeMode={(id)=>{
-        setMode('READ');
+        setMode('READ'); {/* mode state 'READ'로 변경 */}
         setId(id);
       }}></Nav> {/* 변수 전달 시 중괄호로 감싸줌 */}
       {content}
       <a href='/create' onClick={(event)=>{
-        event.preventDefault();
-        setMode('CREATE')
+        event.preventDefault(); {/* a 태그 기본 이벤트 실행 X */}
+        setMode('CREATE'); {/* mode state 'CREATE'로 변경 */}
       }}>Create</a>
     </div>
   );
